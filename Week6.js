@@ -16,8 +16,8 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
    let changingColor = lerpColor(color1, color2, amt);
 
 
-   let sunSize = map (other, 0, 100, 50, 400);
-   let strokeThickness = map (other, 0, 100, 10, 100);
+   let sunSize = map (bass, 0, 100, 50, 400);
+   let strokeThickness = map (bass, 0, 100, 10, 100);
 
 
    fill (changingColor);

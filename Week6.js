@@ -1,7 +1,7 @@
 
 // vocal, drum, bass, and other are volumes ranging from 0 to 100
 function draw_one_frame(words, vocal, drum, bass, other, counter) {
-   background(80);
+   background(10);
 
    angleMode(DEGREES);
 
@@ -33,14 +33,44 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
 
 
 
-//use websafe fonts
+// beam
+push();
+translate(midX, midY);
+rotate(32); // angle
 
+// var
+let beamLen   = height * 0.85;                 
+let maxWidth  = map(drum, 0, 100, 24, 60);   
+let layers    = 500;                          
 
+// tapered glow
+for (let i = 0; i <= layers; i++) {
+  // t: -1(윗끝) ~ 1(아랫끝), y: 빔 축 방향 위치
+  let t  = map(i, 0, layers, -1, 1);
+  let y  = t * (beamLen / 2);
 
+  // falloff
+  let fall = pow(1 - abs(t), 1.7);
 
+  // thickness, brightness
+  let halfW = maxWidth * fall;                 
+  let alpha = 40 + 210 * fall;                 
 
-
-
-
-
+  stroke(255, 220, 120, alpha);                // gold
+  strokeWeight(1);                             
+  line(-halfW, y, halfW, y);                  
 }
+
+// beam core line
+stroke(255, 245, 220, 230);
+strokeWeight(map(bass, 0, 100, 1, 7));
+line(0, -beamLen/2, 0, beamLen/2);
+
+pop();
+}
+
+let noOfStars = 10000; 
+sizeDiff = 0.18; 
+majorAxisMinLen = 10; 
+widthHeightRatio = 0.7; 
+rotationGradient, rotationGradientSlider, stars = [];

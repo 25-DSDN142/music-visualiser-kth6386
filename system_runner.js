@@ -15,6 +15,7 @@ let songIsPlaying = false;
 let songEpoch = 0;              // millis when song starts
 let table;
 let words;
+let coverImg;
 
 function songLoadedError() {
   songButton.elt.innerHTML = "Song: Load Error";
@@ -52,6 +53,9 @@ function setup() {
   main_canvas = createCanvas(canvasWidth, canvasHeight);
   main_canvas.parent('canvasContainer');
   song = loadSound('song.mp3', songLoaded, songLoadedError, songLoadedSoFar);  
+  
+  // Load optional cover image without blocking preload
+  coverImg = loadImage('cover.jpg', () => print('cover loaded'), () => print('cover load failed'));
   
   frameRate(60);
   angleMode(DEGREES);
